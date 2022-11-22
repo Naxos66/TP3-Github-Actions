@@ -10,9 +10,6 @@ jobs:
   build:
     name: test unitaire
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: 16.x
     defaults:
       run:
         working-directory: ./api
