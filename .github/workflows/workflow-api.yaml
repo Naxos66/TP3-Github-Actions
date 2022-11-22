@@ -1,5 +1,5 @@
 name: Test Unitaire API
-run-name: ${{ github.actor }} is testing out Test Unitaire API 🚀
+run-name: ${{ github.actor }} is testing out Test Unitaire API 🎉
 on:
   push:
     branches: [ main ]
