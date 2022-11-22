@@ -7,15 +7,12 @@ on:
     branches: [ main ]
 
 jobs:
-
-  build-and-test:
-      name: Run unit tests
-      runs-on: ubuntu-latest
-      defaults:
-        run:
-        working-directory: ./api
   build:
+    name: test unitaire
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./api
     strategy:
       matrix:
         node-version: [16.x]
