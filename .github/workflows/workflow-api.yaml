@@ -12,16 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: 16.x
     defaults:
       run:
         working-directory: ./api
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ 16.x }}
+      - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ 16.x }}
+          node-version: 16.x
       - run: yarn install
       - run: yarn test
       - run: yarn build
