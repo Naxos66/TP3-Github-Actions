@@ -45,7 +45,7 @@ jobs:
           push: true
           tags: ${{ secrets.GET_USERNAME }}/api:${{ github.sha }}
           file: ./api/Dockerfile
-      - name: test
+      name: test
         services:
           mongo:
             image: mongo
