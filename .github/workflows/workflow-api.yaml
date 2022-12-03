@@ -45,3 +45,10 @@ jobs:
           push: true
           tags: ${{ secrets.GET_USERNAME }}/api:${{ github.sha }}
           file: ./api/Dockerfile
+
+        name : Test d'integration
+        run : curl --location --request POST 'http://localhost:3000/users' \
+              --header 'Content-Type: application/json' \
+              --data-raw '{"email":"simon.jurado@ynov.com", "firstName":"Simon","lastName":"Jurado"}'
+        run : curl 'http://localhost:3000/users'
+
