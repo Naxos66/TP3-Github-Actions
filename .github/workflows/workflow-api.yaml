@@ -47,8 +47,14 @@ jobs:
           file: ./api/Dockerfile
 
         name : Test d'integration
-        run : curl --location --request POST 'http://localhost:3000/users' \
-              --header 'Content-Type: application/json' \
-              --data-raw '{"email":"simon.jurado@ynov.com", "firstName":"Simon","lastName":"Jurado"}'
-        run : curl 'http://localhost:3000/users'
-
+        services:
+          mongo:
+            image: mongo
+            restart: always
+            port: 
+              - 27017:27017
+            environment:
+              MONGO_INITDB_ROOT_USERNAME: root
+              MONGO_INITDB_ROOT_PASSWORD: root
+            export MONGODB_URI = "mongodb://root:root@localhost:27017"
+        - run: yarn test:e2e
