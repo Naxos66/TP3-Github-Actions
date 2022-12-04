@@ -21,7 +21,6 @@ jobs:
           node-version: 16.x
       - name: Cache node modules
         uses: actions/cache@v2
-          id: myCacheStep
         env:
           cache-name: cache-node-modules
         with:
@@ -31,8 +30,7 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-        if: steps.myCacheStep.outputs.cache-hit != 'true'
-        run: yarn install
+      - run: yarn install
       - run: yarn test
       - run: yarn build
 
