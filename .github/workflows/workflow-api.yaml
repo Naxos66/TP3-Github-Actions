@@ -19,6 +19,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
+      - name: Cache node modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
       - run: yarn install
       - run: yarn test
       - run: yarn build
@@ -45,15 +56,4 @@ jobs:
           push: true
           tags: ${{ secrets.GET_USERNAME }}/api:${{ github.sha }}
           file: ./api/Dockerfile
-      - name: Test intégration
-        services:
-        mongo:
-          image: mongo
-          restart: always
-        ports: 
-        - 27017:27017
-        env:
-          MONGO_INITDB_ROOT_USERNAME: root
-          MONGO_INITDB_ROOT_PASSWORD: root
-          MONGO_URI: mongo://root:root@mongo:27017
-      - run: yarn test:e2e
+
